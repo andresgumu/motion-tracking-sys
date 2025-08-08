@@ -47,10 +47,10 @@ This project implements a PID controller in C++ to control stepper motor positio
 2. Adjust potentiometer for desired position
 3. Monitor performance via LCD and serial output
 
-## Technical Notes
+## Component Technical Notes 
 
 - The Potentiometer: A variable resistor; they function as voltage dividers that can adjust voltage and mesure electric potential
-* specific potentiometer used has maximum resistance of 10k ohms, contains three pins: pin 1 & 3 (outer pins) connect to either power or GND, pin 2 (middle pin) is the "wiper" or signal pin. when you turn the knob on the potentiometer, you change the wiper's position which in turn changes the resistance and voltage output.
+  * specific potentiometer used has maximum resistance of 10k ohms, contains three pins: pin 1 & 3 (outer pins) connect to either power or GND, pin 2 (middle pin) is the "wiper" or signal pin. when you turn the knob on the potentiometer, you change the wiper's position which in turn changes the resistance and voltage output.
 
 (insert picture testing potentiometer)
 
