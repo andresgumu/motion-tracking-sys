@@ -78,11 +78,11 @@ void loop() {
 ```
 
 - Stepper Motor: a stepper motor is a type of motor that moves in precise, discrete steps rather than the rotation of a DC motor. 
-* Inside, it has multiple coils that are energized in a specific sequence to create a magnetic field, which than can move the motor's rotor a little bit at a time.
+  * Inside, it has multiple coils that are energized in a specific sequence to create a magnetic field, which than can move the motor's rotor a little bit at a time.
 
 - ULN 2003 Stepper Motor Module: Used alongside the stepper motor since you cannot directly connect it to an arduino (not enough current supplied by arduino).
-* "Built around a ULN2003A integrated circuit, which is a Darlington transistor array. This chip acts as a "buffer" or "switch" that allows a small signal from the Arduino to control the higher current needed by the stepper motor."
-* the module has 4 input pins (IN1-IN4) that connect to the arduino's digital pins and a five pin socket that the stepper motor plugs directly into. Also contains a power input.
+  * "Built around a ULN2003A integrated circuit, which is a Darlington transistor array. This chip acts as a "buffer" or "switch" that allows a small signal from the Arduino to control the higher current needed by the stepper motor."
+  * the module has 4 input pins (IN1-IN4) that connect to the arduino's digital pins and a five pin socket that the stepper motor plugs directly into. Also contains a power input.
 
 (insert picture of implementation)
 
