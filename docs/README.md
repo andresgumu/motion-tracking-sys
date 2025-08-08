@@ -25,28 +25,6 @@ This project implements a PID controller in C++ to control stepper motor positio
 
 ## Setup
 
-### PlatformIO Installation
-```bash
-# Clone repository
-git clone [repository-url]
-cd pid-motor-control
-
-# Build and upload
-pio run --target upload
-
-# Monitor serial output
-pio device monitor
-```
-
-### Hardware Connections
-```
-Arduino Pin → Component
-TBD         → Encoder A
-TBD         → Encoder B  
-TBD         → Stepper driver pins
-TBD         → LCD connections
-A0          → Potentiometer
-```
 
 ## Implementation Progress
 
@@ -71,7 +49,52 @@ A0          → Potentiometer
 
 ## Technical Notes
 
-*Update this section with implementation details, challenges, and solutions as development progresses.*
+- The Potentiometer: A variable resistor; they function as voltage dividers that can adjust voltage and mesure electric potential
+* specific potentiometer used has maximum resistance of 10k ohms, contains three pins: pin 1 & 3 (outer pins) connect to either power or GND, pin 2 (middle pin) is the "wiper" or signal pin. when you turn the knob on the potentiometer, you change the wiper's position which in turn changes the resistance and voltage output.
+
+(insert picture testing potentiometer)
+
+code below:
+
+```c++
+#include <Arduino.h>
+
+void setup() {
+    // sets data rate in bits per second (baud) for serial data transmission
+    Serial.begin(9600); // opens serial port, 9600 bps
+
+    // prints data to the serial port as human-readable ASCII text
+    Serial.println("Potentiometer Test Starting...");
+}
+
+void loop() {
+    // analogRead() reads value from specified analog input pin
+    int potValue = analogRead(A0); // store analog value into variable potValue
+    Serial.print("Potentiometer Value: ");
+    Serial.println(potValue);
+    // delay pauses program for a certain amount of time
+    delay(200); // delay for 200ms
+}
+```
+
+- Stepper Motor: a stepper motor is a type of motor that moves in precise, discrete steps rather than the rotation of a DC motor. 
+* Inside, it has multiple coils that are energized in a specific sequence to create a magnetic field, which than can move the motor's rotor a little bit at a time.
+
+- ULN 2003 Stepper Motor Module: Used alongside the stepper motor since you cannot directly connect it to an arduino (not enough current supplied by arduino).
+* "Built around a ULN2003A integrated circuit, which is a Darlington transistor array. This chip acts as a "buffer" or "switch" that allows a small signal from the Arduino to control the higher current needed by the stepper motor."
+* the module has 4 input pins (IN1-IN4) that connect to the arduino's digital pins and a five pin socket that the stepper motor plugs directly into. Also contains a power input.
+
+(insert picture of implementation)
+
+code: 
+
+```c++
+```
+
+
+
+
+
 
 ## Results
 

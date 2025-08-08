@@ -8,15 +8,14 @@ Day 0
 - **Next Steps**: Look through Arduino Docs, become familiar with components, begin building
 
 Day 1
+- **Tasks**: Familiarize yourself with components (potentiometer, stepper motor)
+- **Challenges**: learning proper breadboarding (connections, safety)
+- **Next Steps**: order extra male-female dupont wires to test/connect stepper motor
+
+Day 2
 - **Tasks**: 
 - **Challenges**: 
 - **Next Steps**: 
-
-## Week 1 Progress
-
-
-
-
 
 
 
