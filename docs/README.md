@@ -49,12 +49,12 @@ This project implements a PID controller in C++ to control stepper motor positio
 
 ## Component Technical Notes 
 
-- The Potentiometer: A variable resistor; they function as voltage dividers that can adjust voltage and mesure electric potential
+- **The Potentiometer**: A variable resistor; they function as voltage dividers that can adjust voltage and mesure electric potential
   * specific potentiometer used has maximum resistance of 10k ohms, contains three pins: pin 1 & 3 (outer pins) connect to either power or GND, pin 2 (middle pin) is the "wiper" or signal pin. when you turn the knob on the potentiometer, you change the wiper's position which in turn changes the resistance and voltage output.
 
-(insert picture testing potentiometer)
-
-code below:
+<div style="text-align: center;">
+  <img src="../images/potentiometer_test.JPEG" alt="Potentiometer Test" width="500" style="margin-bottom: 30px;"/>
+</div>
 
 ```c++
 #include <Arduino.h>
@@ -77,18 +77,46 @@ void loop() {
 }
 ```
 
-- Stepper Motor: a stepper motor is a type of motor that moves in precise, discrete steps rather than the rotation of a DC motor. 
+- **Stepper Motor**: A type of motor that moves in precise, discrete steps rather than the rotation of a DC motor. 
   * Inside, it has multiple coils that are energized in a specific sequence to create a magnetic field, which than can move the motor's rotor a little bit at a time.
 
-- ULN 2003 Stepper Motor Module: Used alongside the stepper motor since you cannot directly connect it to an arduino (not enough current supplied by arduino).
+- **ULN 2003 Stepper Motor Module**: Used alongside the stepper motor since you cannot directly connect it to an arduino (not enough current supplied by arduino).
   * "Built around a ULN2003A integrated circuit, which is a Darlington transistor array. This chip acts as a "buffer" or "switch" that allows a small signal from the Arduino to control the higher current needed by the stepper motor."
   * the module has 4 input pins (IN1-IN4) that connect to the arduino's digital pins and a five pin socket that the stepper motor plugs directly into. Also contains a power input.
 
-(insert picture of implementation)
+<div style="text-align: center;">
+  <img src="../images/stepper_motor_test.JPEG" alt="Potentiometer Test" width="500" style="margin-bottom: 30px;"/>
+</div>
 
-code: 
 
 ```c++
+#include <Arduino.h>
+#include <Stepper.h> // use built-in Stepper library for Arduino
+
+#define STEPS_PER_REVOLUTION 2048 // define a constant (2048 steps for full rev.)
+
+Stepper myStepper(STEPS_PER_REVOLUTION, 8, 10, 9, 11); // had to change 9,10 order
+
+void setup() {
+  // setSpeed() sets motor speed in RPM
+  // doesn't make motor turn, just sets speed at which it will when step() is called
+  myStepper.setSpeed(15);
+
+  Serial.begin(9600);
+}
+
+void loop() {
+    // rotate motor one full revolution clockwise
+  Serial.println("Moving clockwise...");
+  // step() turns motor a specific number of steps
+  myStepper.step(STEPS_PER_REVOLUTION);
+  delay(500);
+  
+  // rotate motor one full revolution counter-clockwise
+  Serial.println("Moving counter-clockwise...");
+  myStepper.step(-STEPS_PER_REVOLUTION);
+  delay(500);
+}
 ```
 
 
