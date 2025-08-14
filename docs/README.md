@@ -191,7 +191,7 @@ void loop() {
   * Observations: When testing, the detection range seemed to be at least 3 meters (width of room), sensitivity seemed to be pretty high (when moving with my whole body or making fast movements) and the coverage area seemed to be ~150 degrees when the sensor was on its side facing the room (opposite ends didn't seem to pick up motion)
 
 <div style="text-align: center;">
-  <img src="../images/PIR_sensor_test.JPEG.jpeg" alt="Potentiometer Test" width="500" style="margin-bottom: 30px;"/>
+  <img src="../images/PIR_sensor_test.JPEG" alt="Potentiometer Test" width="500" style="margin-bottom: 30px;"/>
 </div>
 
 ```c++
