@@ -119,6 +119,72 @@ void loop() {
 }
 ```
 
+- **Rotary Encoder Module**: Basically a sensor that detects rotation and converts it into digital signals.
+  * There are metal contacts/optical sensors inside the encoder; as you rotate, they create two square wave signals (A and B). Why two? One detects how much it rotated, and the other detects in which direction (which signal comes first since it is out of phase)
+  * the signals are 90 degrees out of phase (one leads the other)
+
+<div style="text-align: center;">
+  <img src="../images/REM_test.jpeg" alt="Potentiometer Test" width="500" style="margin-bottom: 30px;"/>
+</div>
+
+test 1: rotate encoder and verify if values change (from 0 -> 1 -> 0 as you rotate)
+```c++
+void setup() {
+  Serial.begin(9600);
+  pinMode(2, INPUT_PULLUP); // Pin 2 now has internal pullup
+  // Encoder CLK connects between Pin 2 and GND
+  // When encoder "clicks", it briefly connects Pin 2 to GND (LOW)
+  // Otherwise, Pin 2 stays HIGH due to pullup
+  pinMode(3, INPUT_PULLUP);
+
+  Serial.println("Encoder Test Started");
+}
+
+void loop() {
+  Serial.print("A: ");
+  Serial.print(digitalRead(2));
+  Serial.print(" B: ");
+  Serial.println(digitalRead(3));
+  delay(100);
+}
+```
+
+test 2: direction of rotation and pulses per revolution (PPR = ~20)
+```c++
+// volatile keyword to tell compiler that the variable can change unexpectedly
+// ..and to always read actual value from memory
+volatile long encoderCount = 0;
+int lastA = 0;
+
+void readEncoder();
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(2, INPUT_PULLUP);
+  pinMode(3, INPUT_PULLUP);
+  // (digitalPinToInterrupt(pin), ISR, mode)
+  // Interrupt Service Routine (ISR); function that returns nothing/has no parameters
+  // CHANGE as mode to trigger the interrupt whenever the pin changes value
+  attachInterrupt(digitalPinToInterrupt(2), readEncoder, CHANGE);
+}
+
+void readEncoder() { // need to define this before setup()
+  int A = digitalRead(2); // set pin 2 reading to A
+  int B = digitalRead(3); // set pin 3 reading to B
+  
+  if (lastA == 0 && A == 1) {
+    if (B == 0) encoderCount++;
+    else encoderCount--;
+  }
+  lastA = A;
+}
+
+void loop() {
+  Serial.print("Position: ");
+  Serial.println(encoderCount);
+  delay(200);
+}
+```
 
 
 
