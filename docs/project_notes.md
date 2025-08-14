@@ -17,7 +17,7 @@ Day 2
 - **Challenges**: 
   * <u>Figuring out if Arduino 5V PSU could properly power the stepper motor:</u> noticed that the rated voltage on the motor itself says "5V DC"; might want to supply it with more voltage if I think about altering the weight of a specific load 
   * <u>Learning Stepper built-in library functions to make the motor rotate:</u> step() and setSpeed() (their uses are explained in respective README code blocks)
-  * <u>Debugging stepper motor not wanting to turn counter-clockwise:</u>
+  * <u>Debugging stepper motor not wanting to turn counter-clockwise:</u> Apparently the pin input is 8,10,9,11 not 8,9,10,11
 - **Next Steps**: Testing rotary encoder module with interrupt-driven reading.
 
 Day 3
@@ -28,7 +28,13 @@ Day 3
   * <u>basic C++ syntax:</u> tried calling a function inside setup() when the function was defined and initialized after setup()
 - **Next Steps**: PIR sensor testing and calibration, LCD1602 interface setup and display testing.
 
-
+Day 4
+- **Tasks**: test PIR sensor and LCD interface
+- **Challenges**:
+  * <u>pin description:</u> Since the three pins on the sensor were not labeled, I had to search the model (HC-SR501) online to find out (left (when looking at sensor with yellow module at bottom left) is GND, middle is HIGH/LOW output, right is power)
+  * <u>:</u> 
+  * <u>:</u> 
+- **Next Steps**: 
 
 
 
@@ -41,5 +47,8 @@ Day 3
 
 Day _
 - **Tasks**: 
-- **Challenges**: 
+- **Challenges**:
+  * <u>:</u>  
+  * <u>:</u> 
+  * <u>:</u> 
 - **Next Steps**: 

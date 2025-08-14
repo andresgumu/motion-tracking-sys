@@ -186,6 +186,45 @@ void loop() {
 }
 ```
 
+- **PIR (Passive Infared) Sensor**: "detects motion by sensing changes in IR (heat) radiation within its field of view"
+  * Has two potentiometers that perform distinct things: one can adjust the sensitivity (from 3 meters to 7 meters) and the other can adjust the delay (from 3 seconds to 5 minutes)
+  * Observations: When testing, the detection range seemed to be at least 3 meters (width of room), sensitivity seemed to be pretty high (when moving with my whole body or making fast movements) and the coverage area seemed to be ~150 degrees when the sensor was on its side facing the room (opposite ends didn't seem to pick up motion)
+
+<div style="text-align: center;">
+  <img src="../images/PIR_sensor_test.JPEG.jpeg" alt="Potentiometer Test" width="500" style="margin-bottom: 30px;"/>
+</div>
+
+```c++
+int pirPin = 8;
+int pirState = LOW; // LOW state means there is no motion
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(pirPin, INPUT);
+  Serial.println("PIR Test Started");
+  Serial.println("Warming up sensor (60 seconds)...");
+  delay(60000); // PIR needs time to calibrate
+  Serial.println("Ready to detect motion!");
+}
+
+void loop() {
+  int motion = digitalRead(pirPin);
+  
+  if (motion == HIGH) {
+    if (pirState == LOW) {
+      Serial.println("MOTION DETECTED!");
+      pirState = HIGH; // change state to moving
+    }
+  } else {
+    if (pirState == HIGH) {
+      Serial.println("Motion ended");
+      pirState = LOW; // change state to static (no movement)
+    }
+  }
+  
+  delay(100);
+}
+```
 
 
 

@@ -1,35 +1,31 @@
 #include <Arduino.h>
 
-// volatile keyword to tell compiler that the variable can change unexpectedly
-// ..and to always read actual value from memory
-volatile long encoderCount = 0;
-int lastA = 0;
-
-void readEncoder();
+int pirPin = 8;
+int pirState = LOW; // LOW state means there is no motion
 
 void setup() {
   Serial.begin(9600);
-  pinMode(2, INPUT_PULLUP);
-  pinMode(3, INPUT_PULLUP);
-  // (digitalPinToInterrupt(pin), ISR, mode)
-  // Interrupt Service Routine (ISR); function that returns nothing/has no parameters
-  // CHANGE as mode to trigger the interrupt whenever the pin changes value
-  attachInterrupt(digitalPinToInterrupt(2), readEncoder, CHANGE);
-}
-
-void readEncoder() { // need to define this before setup()
-  int A = digitalRead(2); // set pin 2 reading to A
-  int B = digitalRead(3); // set pin 3 reading to B
-  
-  if (lastA == 0 && A == 1) {
-    if (B == 0) encoderCount++;
-    else encoderCount--;
-  }
-  lastA = A;
+  pinMode(pirPin, INPUT);
+  Serial.println("PIR Test Started");
+  Serial.println("Warming up sensor (60 seconds)...");
+  delay(60000); // PIR needs time to calibrate
+  Serial.println("Ready to detect motion!");
 }
 
 void loop() {
-  Serial.print("Position: ");
-  Serial.println(encoderCount);
-  delay(200);
+  int motion = digitalRead(pirPin);
+  
+  if (motion == HIGH) {
+    if (pirState == LOW) {
+      Serial.println("MOTION DETECTED!");
+      pirState = HIGH; // change state to moving
+    }
+  } else {
+    if (pirState == HIGH) {
+      Serial.println("Motion ended");
+      pirState = LOW; // change state to static (no movement)
+    }
+  }
+  
+  delay(100);
 }
