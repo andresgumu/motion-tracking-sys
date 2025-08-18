@@ -34,7 +34,7 @@ void loop() {
   * the module has 4 input pins (IN1-IN4) that connect to the arduino's digital pins and a five pin socket that the stepper motor plugs directly into. Also contains a power input.
 
 <div style="text-align: center;">
-  <img src="../images/stepper_motor_test.JPEG" alt="Potentiometer Test" width="500" style="margin-bottom: 30px;"/>
+  <img src="../images/stepper_motor_test.JPEG" alt="Stepper Motor Test" width="500" style="margin-bottom: 30px;"/>
 </div>
 
 
@@ -73,7 +73,7 @@ void loop() {
   * the signals are 90 degrees out of phase (one leads the other)
 
 <div style="text-align: center;">
-  <img src="../images/REM_test.jpeg" alt="Potentiometer Test" width="500" style="margin-bottom: 30px;"/>
+  <img src="../images/REM_test.jpeg" alt="REM Test" width="500" style="margin-bottom: 30px;"/>
 </div>
 
 test 1: rotate encoder and verify if values change (from 0 -> 1 -> 0 as you rotate)
@@ -140,7 +140,7 @@ void loop() {
   * Observations: When testing, the detection range seemed to be at least 3 meters (width of room), sensitivity seemed to be pretty high (when moving with my whole body or making fast movements) and the coverage area seemed to be ~150 degrees when the sensor was on its side facing the room (opposite ends didn't seem to pick up motion)
 
 <div style="text-align: center;">
-  <img src="../images/PIR_sensor_test.JPEG" alt="Potentiometer Test" width="500" style="margin-bottom: 30px;"/>
+  <img src="../images/PIR_sensor_test.JPEG" alt="PIR Sensor Test" width="500" style="margin-bottom: 30px;"/>
 </div>
 
 ```c++
@@ -173,4 +173,84 @@ void loop() {
   
   delay(100);
 }
+```
+- **LCD1602 Interface/Display**: contains 16 columns and 2 rows which is good for displaying short messageas and sensor data (using 4-bit mode in this project)
+  * Power and GND: VSS and VDD pins (used breadboard to provide power to other pins)
+  * Backlight control: A & K pins
+
+<div style="text-align: center;">
+  <img src="../images/LCD_test.JPEG" alt="____ Test" width="500" style="margin-bottom: 30px;"/>
+</div>
+
+```c++
+#include <Arduino.h>
+#include <LiquidCrystal.h> // needed for controlling the LCD
+
+// Creates variable of type LiquidCrystal (using 4 data lines; omit d0-d3)
+/*
+SYNTAX: 
+LiquidCrystal(rs, enable, d4, d5, d6, d7)
+LiquidCrystal(rs, rw, enable, d4, d5, d6, d7)
+LiquidCrystal(rs, enable, d0, d1, d2, d3, d4, d5, d6, d7)
+LiquidCrystal(rs, rw, enable, d0, d1, d2, d3, d4, d5, d6, d7)
+*/
+// Initialize library with interface pins and the corr. # (RS, E, D4, D5, D6, D7)
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println("LCD Test Starting...");
+  
+  // begin() function used to set up LCD's dimensions 
+  // syntax: lcd.begin(cols, rows, charsize(optional) )
+  lcd.begin(16, 2);
+  
+  // print() function used to print text
+  lcd.print("LCD Test!"); // print "LCD Test!" to screen
+
+  // setCursor() function used to set the location at 
+  // ..which subsequent text written to the LCD will be displayed.
+  lcd.setCursor(0, 1);  
+  lcd.print("Hello World!");
+  
+  // for debugging purposes
+  Serial.println("LCD should now display text");
+  Serial.println("If blank, adjust contrast potentiometer");
+}
+
+void loop() {
+  // Display a dynamic counter on the top row
+  lcd.setCursor(10, 0);  
+  lcd.print("    ");     // Clear previous number
+  lcd.setCursor(10, 0);
+  // millis() function returns number of milliseconds since arduino started
+  lcd.print(millis()/1000);  // Show seconds elapsed
+  
+  // Display status on second row
+  lcd.setCursor(12, 1);  // Position: column 12, row 1
+  if ((millis()/1000) % 2 == 0) {
+    lcd.print("ON ");
+  } else {
+    lcd.print("OFF");
+  }
+  
+  delay(500); // allow time for transitions
+}
+```
+
+
+
+
+*template*
+
+- **___**:
+  * 
+  * 
+
+<div style="text-align: center;">
+  <img src="../images/___.JPEG" alt="____ Test" width="500" style="margin-bottom: 30px;"/>
+</div>
+
+```c++
+
 ```
