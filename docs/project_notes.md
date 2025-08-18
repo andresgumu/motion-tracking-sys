@@ -33,6 +33,7 @@ Day 4
 - **Challenges**:
   * <u>pin description:</u> Since the three pins on the sensor were not labeled, I had to search the model (HC-SR501) online to find out (left (when looking at sensor with yellow module at bottom left) is GND, middle is HIGH/LOW output, right is power)
   * <u>LCD display connection:</u> 
+
 | LCD Pin | Function          | Connection                |
 |---------|-------------------|---------------------------|
 | VSS     | Ground            | Blue power rail (**GND**) |
@@ -47,6 +48,9 @@ Day 4
 | D7      | Data Bit 7        | Arduino Pin 2             |
 | A       | Backlight Anode   | Red power rail (**+5V**)  |
 | K       | Backlight Cathode | Blue power rail (**GND**) |
+
+
+
 
   (needed to refer back to potentiometer test to connect V0 pin)
 - **Next Steps**: LED, buzzer, and button testing. RTC module setup and timestamp functionality.
