@@ -33,18 +33,20 @@ Day 4
 - **Challenges**:
   * <u>pin description:</u> Since the three pins on the sensor were not labeled, I had to search the model (HC-SR501) online to find out (left (when looking at sensor with yellow module at bottom left) is GND, middle is HIGH/LOW output, right is power)
   * <u>LCD display connection:</u> 
-  VSS  - Ground                - Blue power rail (GND)
-  VDD  - Power (+5V)           - Red power rail (+5V)
-  VO   - Contrast              - Potentiometer center pin
-  RS   - Register Select       - Arduino Pin 12
-  RW   - Read/Write            - Blue power rail (GND)
-  E    - Enable                - Arduino Pin 11
-  D4   - Data Bit 4            - Arduino Pin 5
-  D5   - Data Bit 5            - Arduino Pin 4
-  D6   - Data Bit 6            - Arduino Pin 3
-  D7   - Data Bit 7            - Arduino Pin 2
-  A    - Backlight Anode       - Red power rail (+5V)
-  K    - Backlight Cathode     - Blue power rail (GND)
+| LCD Pin | Function          | Connection                |
+|---------|-------------------|---------------------------|
+| VSS     | Ground            | Blue power rail (**GND**) |
+| VDD     | Power (+5V)       | Red power rail (**+5V**)  |
+| VO      | Contrast          | Potentiometer center pin  |
+| RS      | Register Select   | Arduino Pin 12            |
+| RW      | Read/Write        | Blue power rail (**GND**) |
+| E       | Enable            | Arduino Pin 11            |
+| D4      | Data Bit 4        | Arduino Pin 5             |
+| D5      | Data Bit 5        | Arduino Pin 4             |
+| D6      | Data Bit 6        | Arduino Pin 3             |
+| D7      | Data Bit 7        | Arduino Pin 2             |
+| A       | Backlight Anode   | Red power rail (**+5V**)  |
+| K       | Backlight Cathode | Blue power rail (**GND**) |
 
   (needed to refer back to potentiometer test to connect V0 pin)
 - **Next Steps**: LED, buzzer, and button testing. RTC module setup and timestamp functionality.
