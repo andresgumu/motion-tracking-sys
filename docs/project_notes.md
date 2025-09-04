@@ -49,11 +49,16 @@ Day 4
 | A       | Backlight Anode   | Red power rail (**+5V**)  |
 | K       | Backlight Cathode | Blue power rail (**GND**) |
 
-
-
-
   (needed to refer back to potentiometer test to connect V0 pin)
 - **Next Steps**: LED, buzzer, and button testing. RTC module setup and timestamp functionality.
+
+Day 5
+- **Tasks**: Foundation & core loop (learning essential libraries, LiquidCrystal.h, and interrupts), building a simple state machine
+- **Challenges**:
+  * <u>:</u>  
+  * <u>:</u> 
+  * <u>:</u> 
+- **Next Steps**: 
 
 
 
