@@ -5,32 +5,53 @@
 enum State { ARMED, TRACKING}; // declare simple user-defined datatype State
 State currentState {};
 
-const int buttonPin = 3;
-int buttonState = 0;
+const int pirPin = 8;
+int pirState = LOW;
+
 
 void setup() {
   Serial.begin(9600);
+  pinMode(pirPin, INPUT);
+  Serial.println("calibrating sensor (60 sec)...");
+  delay(60000);
   Serial.println("System Starting");
-  pinMode(buttonPin, INPUT); // line isn't needed, but written anyways to show that the purpose of a button is to
-  // provide a signal to the microcontroller, so it needs to be configured to read that signal (INPUT).
 }
 
+unsigned long lastPrintTime = 0;
+const unsigned long printInterval = 1000; // 1 second
+
 void loop() {
-  buttonState = digitalRead(buttonPin); // read value of button connected to pin 2 (buttonPin)
-  if (buttonState == LOW){
-    currentState = ARMED;
-  }
-  else { 
-    currentState = TRACKING;
+
+  int motion = digitalRead(pirPin);
+
+  if (motion == HIGH){
+    if (pirState == LOW){
+      Serial.println("Motion Detected");
+      pirState = HIGH;
+      currentState = TRACKING;
+    }
+  } 
+  else {
+    if (pirState == HIGH) {
+      Serial.println("Motion ended");
+      pirState = LOW;
+      currentState = ARMED;
+    }
   }
 
-  switch(currentState) {
-    case ARMED:
-      Serial.println("in ARMED State");
-      break;
-    case TRACKING:
-      Serial.println("in TRACKING State");
-      break;
-  }
-  delay(2000);
+  unsigned long now = millis(); // returns # milliseconds since start of program
+
+  if (now - lastPrintTime >= printInterval){
+    switch(currentState) {
+      case ARMED:
+        Serial.println("in ARMED State");
+        break;
+      case TRACKING:
+        Serial.println("in TRACKING State");
+        break;
+    }
+    lastPrintTime = now;
+}
+
+  delay(10);
 }

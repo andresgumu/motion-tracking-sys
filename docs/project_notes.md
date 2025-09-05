@@ -55,7 +55,7 @@ Day 4
 Day 5
 - **Tasks**: Foundation & core loop (learning essential libraries, LiquidCrystal.h, and interrupts), building a simple state machine
 - **Challenges**:
-  * <u>:</u>  
+  * <u>PIR sensor hold-time:</u> Once the PIR sensor detects motion, its output stays high for a set amount of time. This means if something moves out of the detection zone and back in, the PIR sensor won't register the second movement until the first movement hold-time has expired. I will be instead testing the HC-SR04 ultrasonic sensor to see if it is better optimized for this project.
   * <u>:</u> 
   * <u>:</u> 
 - **Next Steps**: 
