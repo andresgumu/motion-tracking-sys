@@ -1,6 +1,5 @@
 #include <Arduino.h>
 #include <Stepper.h>
-#include <LiquidCrystal.h> // needed for controlling the LCD
 
 enum State { ARMED, TRACKING}; // declare simple user-defined datatype State
 State currentState {};
@@ -18,8 +17,6 @@ void setup() {
 
   Serial.println("System Starting");
 }
-
-
 void loop() {
 
   digitalWrite(trigPin, LOW);
@@ -27,7 +24,6 @@ void loop() {
   digitalWrite(trigPin, HIGH);
   delayMicroseconds(10);
   digitalWrite(trigPin, LOW);
-
   duration = pulseIn(echoPin, HIGH);
   currentDistance = (duration*.0343)/2;
   Serial.print("Distance: ");
@@ -40,7 +36,6 @@ void loop() {
   else {
     currentState = ARMED;
   }
-
   switch(currentState) {
     case ARMED:
       Serial.println("in ARMED State");
@@ -49,8 +44,6 @@ void loop() {
       Serial.println("in TRACKING State");
       break;
   }
-
   prevDistance = currentDistance;
   delay(200);
-
 }

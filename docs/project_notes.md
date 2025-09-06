@@ -56,11 +56,15 @@ Day 5
 - **Tasks**: Foundation & core loop (learning essential libraries, LiquidCrystal.h, and interrupts), building a simple state machine
 - **Challenges**:
   * <u>PIR sensor hold-time:</u> Once the PIR sensor detects motion, its output stays high for a set amount of time. This means if something moves out of the detection zone and back in, the PIR sensor won't register the second movement until the first movement hold-time has expired. I will be instead testing the HC-SR04 ultrasonic sensor to see if it is better optimized for this project.
-  * <u>:</u> 
+- **Next Steps**: learn to interface with the ultrasonic sensor and figure out a way to build a scanning program
+
+Day 6
+- **Tasks**: test ultrasonic sensor and begin building main program with stepper motor and ultrasonic sensor integration
+- **Challenges**:
+  * <u>small stepper motor and figuring out how to rotate sensor:</u> I am thinking of using a small popsicle stick and blue tac to mount the sensor and ensure the sensor rotates with the steppor motor shaft. This is crucial for implementing a program that can iteratively call the ultrasonic sensor at different stepper motor angles and find the minimum distance to an object.
+  * <u>scanning logic and ensuring the stepper doesn't go out of max/min. angle:</u> 
   * <u>:</u> 
 - **Next Steps**: 
-
-
 
 
 
