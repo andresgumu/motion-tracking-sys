@@ -5,53 +5,52 @@
 enum State { ARMED, TRACKING}; // declare simple user-defined datatype State
 State currentState {};
 
-const int pirPin = 8;
-int pirState = LOW;
-
+const int trigPin = 9;
+const int echoPin = 10;
+float duration;
+float currentDistance, prevDistance;
+float threshold = 3;
 
 void setup() {
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
   Serial.begin(9600);
-  pinMode(pirPin, INPUT);
-  Serial.println("calibrating sensor (60 sec)...");
-  delay(60000);
+
   Serial.println("System Starting");
 }
 
-unsigned long lastPrintTime = 0;
-const unsigned long printInterval = 1000; // 1 second
 
 void loop() {
 
-  int motion = digitalRead(pirPin);
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
 
-  if (motion == HIGH){
-    if (pirState == LOW){
-      Serial.println("Motion Detected");
-      pirState = HIGH;
-      currentState = TRACKING;
-    }
-  } 
+  duration = pulseIn(echoPin, HIGH);
+  currentDistance = (duration*.0343)/2;
+  Serial.print("Distance: ");
+  Serial.println(currentDistance);
+  delay(100);
+
+  if (fabs(prevDistance - currentDistance) > threshold){
+    currentState = TRACKING;
+  }
   else {
-    if (pirState == HIGH) {
-      Serial.println("Motion ended");
-      pirState = LOW;
-      currentState = ARMED;
-    }
+    currentState = ARMED;
   }
 
-  unsigned long now = millis(); // returns # milliseconds since start of program
+  switch(currentState) {
+    case ARMED:
+      Serial.println("in ARMED State");
+      break;
+    case TRACKING:
+      Serial.println("in TRACKING State");
+      break;
+  }
 
-  if (now - lastPrintTime >= printInterval){
-    switch(currentState) {
-      case ARMED:
-        Serial.println("in ARMED State");
-        break;
-      case TRACKING:
-        Serial.println("in TRACKING State");
-        break;
-    }
-    lastPrintTime = now;
-}
+  prevDistance = currentDistance;
+  delay(200);
 
-  delay(10);
 }
