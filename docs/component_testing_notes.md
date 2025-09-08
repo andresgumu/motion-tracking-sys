@@ -63,7 +63,7 @@ void loop() {
   
   // rotate motor one full revolution counter-clockwise
   Serial.println("Moving counter-clockwise...");
-  myStepper.step(-STEPS_PER_REVOLUTION);
+  myStepper.step(STEPS_PER_REVOLUTION);
   delay(500);
 }
 ```
