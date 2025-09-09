@@ -13,7 +13,7 @@ float threshold = 3;
 
 // stepper motor
 const int STEPS_PER_REVOLUTION = 2048;
-Stepper myStepper (STEPS_PER_REVOLUTION, 2,4,3,5); 
+Stepper myStepper (STEPS_PER_REVOLUTION, 4,6,5,7); 
 
 // tracking variables
 
